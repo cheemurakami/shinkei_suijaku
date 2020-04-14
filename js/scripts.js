@@ -1,5 +1,6 @@
 function Card(word, number) {
-  
+  this.word = word;
+  this.number = number;
   this.cards = [];
 }
 
@@ -19,20 +20,32 @@ function shuffle(a) {
 }
 
 
-
+//give cards id with index number
 function assignCards(cardsToAssign){
   var cardsDeck = $("div.word-cards");
   var htmlForCards = "";
   for (var i = 0; i<cardsToAssign.cards.length; i++){
-    $(".word-cards").append("<div class='word-card'>" + cardsToAssign.cards[i] + "</div>");
+    htmlForCards = $(".word-cards").append("<div class='word-card'>" + cardsToAssign.cards[i] + "</div>");
   }
   cardsDeck.append(htmlForCards);
 }
 
+function showCard(cards){
+  console.log('hi');  //clicked div no val wo show
+}
+function attachCardListeners(){
+  $("div.word-cards").on("click", "div", function(){
+    showCard(this.word);
+  });
+};
+
+
+
+var cards = new Card();
 $(document).ready(function() {
+  attachCardListeners(cards);
   $("#start").click(function(){
-    var cards = new Card();
-    var deck = cards.wordDeck();
-    assignCards(cards);
+    cards.wordDeck();
+    assignCards(cards); // show array of cards
   });
 });
